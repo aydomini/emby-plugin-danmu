@@ -1,0 +1,33 @@
+# Build results
+Emby.Plugin.Danmu/bin/
+Emby.Plugin.Danmu/obj/
+artifacts/
+
+# IDE folders
+.idea/
+.vs/
+.vscode/
+
+# Claude Code 工作目录
+.claude/
+
+# Reference source code (Jellyfin version, for migration only)
+jellyfin-plugin-danmu/
+
+# OS files
+**/.DS_Store
+Thumbs.db
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# JSON config files (may contain secrets)
+*.json
+!global.json
+
+# Environment files
+**/.env
+**/.env.local
