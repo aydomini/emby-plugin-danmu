@@ -10,6 +10,7 @@ using Emby.Plugin.Danmu.Configuration;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
 using Emby.Plugin.Danmu.Core.Extensions;
+using Emby.Plugin.Danmu.Core.Singleton;
 
 namespace Emby.Plugin.Danmu.Scraper.DanmuApi
 {
@@ -174,7 +175,7 @@ namespace Emby.Plugin.Danmu.Scraper.DanmuApi
                     var httpRequestOptions = GetDefaultHttpRequestOptions(url, null, cancellationToken);
                     var response = await httpClient.GetResponse(httpRequestOptions).ConfigureAwait(false);
 
-                    if (response.StatusCode == HttpStatusCode.TooManyRequests)
+                    if (response.StatusCode == (HttpStatusCode)429) // TooManyRequests
                     {
                         if (attempt < maxRetries - 1)
                         {

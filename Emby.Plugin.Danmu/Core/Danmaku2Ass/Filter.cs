@@ -101,9 +101,9 @@ namespace Danmaku2Ass
             List<Danmaku> keep = new List<Danmaku>();
             foreach (var danmaku in danmakus)
             {
-                if (!string.IsNullOrEmpty(danmaku.Text))
+                if (!string.IsNullOrEmpty(danmaku.Content))
                 {
-                    danmaku.Text = EmojiRegex.Replace(danmaku.Text, "");
+                    danmaku.Content = EmojiRegex.Replace(danmaku.Content, "");
                 }
                 keep.Add(danmaku);
             }

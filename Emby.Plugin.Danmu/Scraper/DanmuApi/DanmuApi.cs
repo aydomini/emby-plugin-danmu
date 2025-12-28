@@ -287,11 +287,10 @@ namespace Emby.Plugin.Danmu.Scraper.DanmuApi
             }
 
             // 解析允许的采集源列表（按逗号分隔，转小写）
-            var sourceSet = allowedSources
+            var sourceSet = new HashSet<string>(allowedSources
                 .Split(',')
                 .Select(s => s.Trim().ToLowerInvariant())
-                .Where(s => !string.IsNullOrEmpty(s))
-                .ToHashSet();
+                .Where(s => !string.IsNullOrEmpty(s)));
 
             // 如果采集源列表为空，返回所有结果
             if (sourceSet.Count == 0)
@@ -329,11 +328,10 @@ namespace Emby.Plugin.Danmu.Scraper.DanmuApi
             }
 
             // 解析允许的平台列表（按逗号分隔，转小写）
-            var platformSet = allowedPlatforms
+            var platformSet = new HashSet<string>(allowedPlatforms
                 .Split(',')
                 .Select(p => p.Trim().ToLowerInvariant())
-                .Where(p => !string.IsNullOrEmpty(p))
-                .ToHashSet();
+                .Where(p => !string.IsNullOrEmpty(p)));
 
             // 如果平台列表为空，返回第一组剧集
             if (platformSet.Count == 0)

@@ -35,7 +35,7 @@ namespace Emby.Plugin.Danmu.Scraper.Dandan
             get { return Plugin.Instance?.Configuration.Dandan ?? new DandanOption(); }
         }
 
-        protected string ApiID {
+        public string ApiID {
             get
             {
                 var apiId = Environment.GetEnvironmentVariable("DANDAN_API_ID");
@@ -48,7 +48,7 @@ namespace Emby.Plugin.Danmu.Scraper.Dandan
             }
         }
 
-        protected string ApiSecret {
+        public string ApiSecret {
             get
             {
                 var apiSecret = Environment.GetEnvironmentVariable("DANDAN_API_SECRET");
@@ -93,8 +93,8 @@ namespace Emby.Plugin.Danmu.Scraper.Dandan
             {
                 ["fileName"] = Path.GetFileNameWithoutExtension(item.Path),
                 ["fileHash"] = "00000000000000000000000000000000",
-                ["fileSize"] = item.Size ?? 0,
-                ["videoDuration"] = (item.RunTimeTicks ?? 0) / 10000000,
+                ["fileSize"] = item.Size ?? 0L,
+                ["videoDuration"] = (item.RunTimeTicks ?? 0L) / 10000000,
                 ["matchMode"] = "fileNameOnly",
             };
             if (this.Config.MatchByFileHash)
