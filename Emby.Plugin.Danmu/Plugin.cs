@@ -66,7 +66,7 @@ namespace Emby.Plugin.Danmu
                 .ToList()
                 .AsReadOnly();
             scraperManager.Register(Scrapers);
-            logger.Info("danmu 插件加载完成, 支持{0}个, {1}", Scrapers.Count, Scrapers.ToJson());
+            logger.Info("danmu 插件加载完成, 支持{0}个弹幕源: {1}", Scrapers.Count, string.Join(", ", Scrapers.Select(s => s.Name)));
         }
 
         public override string Description => "全网弹幕插件";
