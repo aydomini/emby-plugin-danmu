@@ -60,7 +60,8 @@ namespace Emby.Plugin.Danmu.Scraper.Youku
 
                 // 检测标题是否相似（越大越相似）
                 var score = searchName.Distance(title);
-                if (score < 0.7)
+                // 降低相似度阈值以提高匹配率
+                if (score < 0.5)
                 {
                     continue;
                 }
@@ -101,9 +102,10 @@ namespace Emby.Plugin.Danmu.Scraper.Youku
 
                 // 检测标题是否相似（越大越相似）
                 var score = searchName.Distance(title);
-                if (score < 0.7)
+                // 降低相似度阈值以提高匹配率
+                if (score < 0.5)
                 {
-                    log.Info("[{0}] 标题差异太大，忽略处理. 搜索词：{1}, score:　{2}", title, searchName, score);
+                    log.Info("[{0}] 标题差异太大，忽略处理. 搜索词：{1}, score: {2}", title, searchName, score);
                     continue;
                 }
 
@@ -235,7 +237,8 @@ namespace Emby.Plugin.Danmu.Scraper.Youku
                 var pubYear = video.Year;
 
                 var score = keyword.Distance(title);
-                if (score <= 0)
+                // 降低相似度阈值以提高匹配率
+                if (score < 0.3)
                 {
                     continue;
                 }

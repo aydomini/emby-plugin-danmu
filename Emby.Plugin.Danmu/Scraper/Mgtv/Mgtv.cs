@@ -61,7 +61,8 @@ namespace Emby.Plugin.Danmu.Scrapers.Mgtv
 
                 // 检测标题是否相似（越大越相似）
                 var score = searchName.Distance(title);
-                if (score < 0.7)
+                // 降低相似度阈值以提高匹配率
+                if (score < 0.5)
                 {
                     continue;
                 }
@@ -103,9 +104,10 @@ namespace Emby.Plugin.Danmu.Scrapers.Mgtv
 
                 // 检测标题是否相似（越大越相似）
                 var score = searchName.Distance(title);
-                if (score < 0.7)
+                // 降低相似度阈值以提高匹配率
+                if (score < 0.5)
                 {
-                    log.LogDebug("[{0}] 标题差异太大，忽略处理. 搜索词：{1}, score:　{2}", title, searchName, score);
+                    log.LogDebug("[{0}] 标题差异太大，忽略处理. 搜索词：{1}, score: {2}", title, searchName, score);
                     continue;
                 }
 

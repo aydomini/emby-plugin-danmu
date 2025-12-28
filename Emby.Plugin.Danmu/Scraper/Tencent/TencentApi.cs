@@ -80,7 +80,8 @@ namespace Emby.Plugin.Danmu.Scraper.Tencent
                         continue;
                     }
                     
-                    if (item.VideoInfo.Title.Distance(keyword) <= 0)
+                    // 降低相似度阈值以提高匹配率
+                    if (item.VideoInfo.Title.Distance(keyword) < 0.3)
                     {
                         continue;
                     }
