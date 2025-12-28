@@ -93,7 +93,7 @@ namespace Emby.Plugin.Danmu.Scraper.Dandan
             {
                 ["fileName"] = Path.GetFileNameWithoutExtension(item.Path),
                 ["fileHash"] = "00000000000000000000000000000000",
-                ["fileSize"] = item.Size ?? 0L,
+                ["fileSize"] = item.Size > 0 ? item.Size : 0L,
                 ["videoDuration"] = (item.RunTimeTicks ?? 0L) / 10000000,
                 ["matchMode"] = "fileNameOnly",
             };
