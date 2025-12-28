@@ -105,9 +105,10 @@ namespace Emby.Plugin.Danmu.Scraper.Bilibili
                     }
 
                     var score = searchName.Distance(title);
-                    if (score < 0.7)
+                    // 降低相似度阈值以提高匹配率，特别是对于译名差异的情况
+                    if (score < 0.5)
                     {
-                        log.Info($"Bilibili.Search - 因标题相似度低 ({score}，阈值: 0.7，对比: '{searchName}') 而跳过B站项目 '{title}'. Emby 名称: '{item.Name}'");
+                        log.Info($"Bilibili.Search - 因标题相似度低 ({score}，阈值: 0.5，对比: '{searchName}') 而跳过B站项目 '{title}'. Emby 名称: '{item.Name}'");
                         continue;
                     }
 
@@ -187,9 +188,10 @@ namespace Emby.Plugin.Danmu.Scraper.Bilibili
                     }
 
                     var score = searchName.Distance(title);
-                    if (score < 0.7)
+                    // 降低相似度阈值以提高匹配率，特别是对于译名差异的情况
+                    if (score < 0.5)
                     {
-                        log.Info($"Bilibili.SearchMediaId - 因标题相似度低 ({score}，阈值: 0.7，对比: '{searchName}') 而跳过B站项目 '{title}'. Emby 名称: '{item.Name}'");
+                        log.Info($"Bilibili.SearchMediaId - 因标题相似度低 ({score}，阈值: 0.5，对比: '{searchName}') 而跳过B站项目 '{title}'. Emby 名称: '{item.Name}'");
                         continue;
                     }
 

@@ -151,8 +151,19 @@ namespace Emby.Plugin.Danmu.Scraper.Youku
             // 优酷的id包括非法的=符号，会导致jellyfin自动删除，这里做下encode
             if (isMovieItemType)
             {
-                media.Id = HttpUtility.UrlEncode(media.Episodes.Count > 0 ? $"{media.Episodes[0].Id}" : "");
-                media.CommentId = media.Episodes.Count > 0 ? $"{media.Episodes[0].CommentId}" : "";
+                // 修复：对于电影，如果没有 Episodes 数据，使用 show_id 作为 CommentId
+                if (media.Episodes.Count > 0)
+                {
+                    media.Id = HttpUtility.UrlEncode($"{media.Episodes[0].Id}");
+                    media.CommentId = $"{media.Episodes[0].CommentId}";
+                }
+                else
+                {
+                    // 使用 show_id 作为备用 CommentId
+                    media.Id = HttpUtility.UrlEncode(id);
+                    media.CommentId = id;
+                    log.Info("[{0}]电影 '{1}' 没有 Videos 数据，使用 show_id 作为 CommentId: {2}", this.Name, item.Name, id);
+                }
             }
             else
             {

@@ -793,6 +793,15 @@ namespace Emby.Plugin.Danmu
 
                             // 剧集可能更新中
                             int dabmuEpisodesCount = media.Episodes.Count;
+
+                            // 修复：检查弹幕源返回的剧集数是否有效
+                            if (dabmuEpisodesCount == 0)
+                            {
+                                _logger.Warn("[{0}]弹幕源返回的剧集数为 0，无法匹配弹幕. ProviderId: {1}, media.Id={2}, media.CommentId={3}",
+                                    scraper.Name, providerVal, media.Id ?? "null", media.CommentId ?? "null");
+                                break;
+                            }
+
                             if (ignoreEpisodesMatch && dabmuEpisodesCount != episodes.Count)
                             {
                                 _logger.Info("[{0}]剧集数不匹配. 可能是更新中进行强制更新: {1}, media.Episodes={2}, episodes.Count={3}", scraper.Name, providerVal, dabmuEpisodesCount, episodes.Count);
@@ -1296,6 +1305,14 @@ namespace Emby.Plugin.Danmu
             }
 
             // 剧集可能更新中
+            // 修复：检查弹幕源返回的剧集数是否有效
+            if (media.Episodes.Count == 0)
+            {
+                _logger.Warn("[{0}]弹幕源返回的剧集数为 0，无法匹配弹幕. ProviderId: {1}, media.Id={2}, media.CommentId={3}",
+                    scraper.Name, providerVal, media.Id ?? "null", media.CommentId ?? "null");
+                return null;
+            }
+
             if (ignoreEpisodesMatch && media.Episodes.Count != episodes.Count)
             {
                 _logger.Info("[{0}]剧集数不匹配. 可能是更新中进行强制更新: {1}, media.Episodes={2}, episodes.Count={3}", scraper.Name, providerVal, media.Episodes.Count, episodes.Count);
