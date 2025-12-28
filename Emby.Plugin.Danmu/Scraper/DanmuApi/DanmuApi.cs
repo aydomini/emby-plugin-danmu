@@ -364,7 +364,7 @@ namespace Emby.Plugin.Danmu.Scraper.DanmuApi
             return new List<Entity.Episode>();
         }
 
-        protected override string NormalizeSearchName(string name)
+        protected new string NormalizeSearchName(string name)
         {
             return Utils.NormalizeSearchName(name);
         }
